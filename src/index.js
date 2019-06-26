@@ -1,12 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import './index.css'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+document.body.innerHTML = 'move your mouse around'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+
+    
+let ctx = new AudioContext
+
+let osc = ctx.createOscillator()
+
+osc.connect(ctx.destination)
+
+osc.start()
+
+window.onmousemove = event => {
+  document.body.style.backgroundColor =
+    `hsl(${event.clientX}, 60%, 60%)`
+    
+    osc.frequency.value = event.clientX
+}
